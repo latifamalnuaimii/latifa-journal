@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero-section">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="eyebrow-star">✳</span> YOUR SPACE TO PAUSE & REFLECT</div>
+      <h1>Every little thought <em>deserves a place.</em></h1>
+      <p class="hero-lead">The ideas, the memories, the moments in between. Keep them all in one beautiful, private little corner of the internet.</p>
+      <div class="hero-actions">
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Start your journal <span aria-hidden="true">↗</span></a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline">I already have an account</a>
+      </div>
+      <div class="hero-footnote"><span class="dot dot-green"></span> Your notes are saved to your account, just for you.</div>
+    </div>
+    <div class="hero-visual" aria-label="Preview of a journal note">
+      <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+      <div class="deco-star star-top" aria-hidden="true">✧</div>
+      <div class="deco-star star-bottom" aria-hidden="true">✳</div>
+      <div class="preview-card">
+        <div class="preview-top"><span class="preview-logo">✳</span><span class="preview-label">MY LITTLE SPACE</span><span class="preview-menu">•••</span></div>
+        <div class="preview-date">MONDAY, NOVEMBER 2</div>
+        <h2>Finding beauty<br>in ordinary days <span class="mini-heart">♡</span></h2>
+        <span class="mood-pill">✦ Feeling grateful</span>
+        <p>Today reminded me that the smallest moments can become the loveliest memories. A slow morning, a good conversation, a new idea...</p>
+        <div class="preview-footer"><span>✿ &nbsp; Saved just for you</span><span>↗</span></div>
+      </div>
+      <div class="floating-sticker">little moments<br><em>matter ♡</em></div>
+    </div>
+  </div>
+</section>
+<section class="features-section">
+  <div class="container">
+    <div class="features-intro"><p class="section-kicker">A NOTE TO YOURSELF</p><h2>Simple things, thoughtfully made.</h2></div>
+    <div class="feature-grid">
+      <article class="feature-item"><span class="feature-icon lavender">✎</span><h3>Write your heart out</h3><p>Jot down an idea, memory or feeling whenever inspiration strikes.</p></article>
+      <article class="feature-item"><span class="feature-icon peach">♡</span><h3>Keep it yours</h3><p>Create an account and access only the notes that belong to you.</p></article>
+      <article class="feature-item"><span class="feature-icon cream">✧</span><h3>Come back anytime</h3><p>Your notes live in a database, ready whenever you want to revisit them.</p></article>
+    </div>
+  </div>
+</section>
+<section class="bottom-cta"><div class="container"><span class="cta-star">✳</span><h2>Your story is worth keeping.</h2><p>Let's give your thoughts a home.</p><a class="btn btn-dark" href="{{ url_for('register') }}">Create my journal ↗</a></div></section>
+{% endblock %}

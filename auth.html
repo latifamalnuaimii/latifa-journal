@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="auth-section">
+  <div class="auth-decoration" aria-hidden="true">✳</div>
+  <div class="auth-card">
+    <div class="auth-symbol">✳</div>
+    {% if action == 'register' %}
+      <p class="section-kicker">YOUR STORY STARTS HERE</p>
+      <h1>Make yourself <em>at home.</em></h1>
+      <p class="auth-description">A lovely little place to collect your thoughts, one note at a time.</p>
+    {% else %}
+      <p class="section-kicker">SO GOOD TO SEE YOU AGAIN</p>
+      <h1>Welcome <em>back.</em></h1>
+      <p class="auth-description">Your journal is right where you left it.</p>
+    {% endif %}
+    <form action="{{ url_for(action) }}" method="post" class="form-stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      {% if action == 'register' %}
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" placeholder="e.g. Latifa" required maxlength="80" minlength="2" autocomplete="name" value="{{ request.form.get('name','') }}">
+      {% endif %}
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required maxlength="254" autocomplete="email" value="{{ request.form.get('email','') }}">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" placeholder="{{ 'At least 8 characters' if action == 'register' else 'Enter your password' }}" required minlength="{{ 8 if action == 'register' else 1 }}" autocomplete="{{ 'new-password' if action == 'register' else 'current-password' }}">
+      <button type="submit" class="btn btn-primary btn-full">{{ 'Create my account' if action == 'register' else 'Log in to my journal' }} <span aria-hidden="true">↗</span></button>
+    </form>
+    <p class="auth-switch">{% if action == 'register' %}Already have an account? <a href="{{ url_for('login') }}">Log in</a>{% else %}New to the journal? <a href="{{ url_for('register') }}">Create an account</a>{% endif %}</p>
+  </div>
+</section>
+{% endblock %}

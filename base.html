@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fcfaf7">
+  <meta name="description" content="Latifa's Journal — your peaceful corner to write, reflect and save the little moments.">
+  <title>{{ title }} | Latifa's Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="{{ url_for('home') }}" class="brand" aria-label="Latifa's Journal home">
+          <span class="brand-mark" aria-hidden="true">✳</span><span>latifa<span class="brand-apostrophe">’</span>s <em>journal</em></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('dashboard') }}" class="nav-link">My notes</a>
+            <form method="post" action="{{ url_for('logout') }}" class="nav-form">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <button type="submit" class="nav-link nav-text-button">Log out</button>
+            </form>
+            <a href="{{ url_for('new_note') }}" class="btn btn-small btn-dark">+ Write a note</a>
+          {% else %}
+            <a href="{{ url_for('login') }}" class="nav-link">Log in</a>
+            <a href="{{ url_for('register') }}" class="btn btn-small btn-dark">Get started <span aria-hidden="true">↗</span></a>
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="container flash-wrap" role="status">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }} <button type="button" aria-label="Dismiss message" class="flash-close" data-close-flash>×</button></div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main id="main-content">{% block content %}{% endblock %}</main>
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <span>✳ &nbsp;Made with care by Latifa Alnuaimi</span>
+        <span class="footer-middle">A little space for big thoughts.</span>
+        <span class="server-label" title="Server handling this request">Served by <strong>{{ instance_label }}</strong></span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
